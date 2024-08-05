@@ -1,0 +1,75 @@
+from PIL import Image
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import messagebox
+
+root = tk.Tk()
+root.geometry("300x300")
+root.title("Roshan Image Format Converter")
+
+global img_1
+
+
+def select():
+    global img_1
+    img = filedialog.askopenfilename(title="Select a Image")
+    entry1.delete(0, tk.END)
+    entry1.insert(0, img)
+    img_1 = Image.open(img)
+
+
+def jpg():
+    global img_1
+    img_2 = filedialog.asksaveasfilename(
+        defaultextension='.jpg')
+    img_1 = img_1.convert('RGB')
+    img_1.save(img_2)
+    messagebox.showinfo("Roshan(Congrats)", "Converted to JPG")
+
+
+def png():
+    global img_1
+    img_2 = filedialog.asksaveasfilename(
+        defaultextension='.png')
+    img_1.save(img_2)
+    messagebox.showinfo("Roshan(Congrats)", "Converted to PNG")
+
+
+def webp():
+    global img_1
+    img_2 = filedialog.asksaveasfilename(
+        defaultextension='.webp')
+    img_1.save(img_2)
+    messagebox.showinfo("Roshan(Congrats)", "Converted to Webp")
+
+
+frame1 = tk.Frame(root)
+frame1.pack(pady=20)
+
+
+l1 = tk.Label(frame1, text="Select:")
+l1.pack(side="left", padx=10)
+button1 = tk.Button(frame1, text="Upload Image", width=20, command=select)
+button1.pack(padx=10)
+entry1 = tk.Entry(frame1, width=30)
+entry1.pack(side="left",pady=10)
+
+frame2 = tk.Frame(root)
+frame2.pack(pady=20)
+
+button2 = tk.Button(frame2, text="To JPG", width=20, command=jpg)
+button2.pack(padx=10)
+
+frame3 = tk.Frame(root)
+frame3.pack(pady=20)
+
+button3 = tk.Button(frame3, text="To PNG", width=20, command=png)
+button3.pack(padx=10)
+
+frame4 = tk.Frame(root)
+frame4.pack(pady=20)
+
+button4 = tk.Button(frame4, text="To Webp", width=20, command=webp)
+button4.pack(padx=10)
+
+root.mainloop()
